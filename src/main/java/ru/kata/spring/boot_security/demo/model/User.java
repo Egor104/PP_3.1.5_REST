@@ -22,29 +22,24 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    // Поле, находящееся под аннотацией Transient, не имеет отображения в БД.
-    @Transient
-    private String passwordConfirm;
-    //FetchType.EAGER – «жадная» загрузка, т.е. список ролей загружается
+    // FetchType.EAGER – «жадная» загрузка, т.е. список ролей загружается
     // вместе с пользователем сразу (не ждет пока к нему обратятся).
     @ManyToMany(fetch = FetchType.EAGER)
+    // Создаём новую таблицу (третью) с двумя колонками, связывая юзеров с ролями.
+    @JoinTable(name = "user_roles",
+            joinColumns =  @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name ="role_id"))
     private Set<Role> roles;
 
     public User() {}
 
-    public User(String username) {
-        this.username = username;
-    }
-
     public Long getId() { return id; }
     public Set<Role> getRoles() { return roles; }
-    public String getPasswordConfirm() { return passwordConfirm; }
 
     public void setId(Long id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setRoles(Set<Role> roles) { this.roles = roles; }
     public void setPassword(String password) { this.password = password; }
-    public void setPasswordConfirm(String passwordConfirm) { this.passwordConfirm = passwordConfirm; }
 
     @Override
     public String toString() {

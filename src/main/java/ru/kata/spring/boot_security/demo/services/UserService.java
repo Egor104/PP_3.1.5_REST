@@ -20,7 +20,7 @@ import java.util.Optional;
 // UserDetailsService, используется чтобы создать UserDetails объект путем реализации
 // единственного метода этого интерфейса loadUserByUsername(String username)
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @PersistenceContext
     private EntityManager em;
@@ -55,14 +55,6 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAllUsers() { return userRepository.findAll(); }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
-        if (user == null)
-            throw new UsernameNotFoundException("User not found");
-        return user;
-    }
 
     public List<User> usergtList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
