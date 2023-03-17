@@ -7,14 +7,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+// GrantedAuthority отражает разрешения выданные пользователю в масштабе всего приложения,
+// такие разрешения как правило называются «роли»
 public class Role implements GrantedAuthority {
 
     @Id
     private long id;
     private String name;
+    // Поле, находящееся под аннотацией Transient, не имеет отображения в БД.
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
+
     public Role(){}
     public Role(Long id) {
         this.id = id;

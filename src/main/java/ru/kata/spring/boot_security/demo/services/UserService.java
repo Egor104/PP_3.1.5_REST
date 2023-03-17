@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+// UserDetailsService, используется чтобы создать UserDetails объект путем реализации
+// единственного метода этого интерфейса loadUserByUsername(String username)
 @Service
 public class UserService implements UserDetailsService {
 
