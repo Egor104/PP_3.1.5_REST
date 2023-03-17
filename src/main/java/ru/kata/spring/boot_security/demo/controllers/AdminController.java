@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 @Controller
 public class AdminController {
+
     @Autowired
     private UserService userService;
 
@@ -28,11 +29,5 @@ public class AdminController {
             userService.deleteUserById(userId);
         }
         return "redirect:/admin";
-    }
-
-    @GetMapping("/admin/gt/{userId}")
-    public String  gtUser(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute("allUsers", userService.usergtList(userId));
-        return "admin";
     }
 }

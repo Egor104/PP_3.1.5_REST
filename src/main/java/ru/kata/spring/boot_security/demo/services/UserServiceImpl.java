@@ -17,7 +17,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @PersistenceContext
-    private EntityManager em;
     BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -49,9 +48,4 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> findAllUsers() { return userRepository.findAll(); }
-
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
 }
