@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Все пользователи</title>
+</head>
+<body>
+
+<div align="center" style="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px">
+
+    <table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+        <tbody>
+        <tr>
+            <td style="text-align:center">Id</td>
+            <td style="text-align:center">Имя</td>
+            <td style="text-align:center">Редактировать</td>
+            <td style="text-align:center">Удалить</td>
+        </tr>
+        </tbody>
+
+        <tr th:each="user : ${users}">
+            <td style="text-align:center" th:text="${user.getId()}">Id</td>
+            <td style="text-align:center" th:text="${user.getUsername()}">Имя</td>
+
+            <td style="text-align: center">
+                <form th:method="GET" th:action="@{/edit/{id}(id=${user.getId()})}">
+                    <label>
+                        <input style="background-color: cornflowerblue" th:type="submit" th:value="Редактировать">
+                    </label>
+                </form>
+            </td>
+
+            <td style="text-align: center">
+                <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                    <label style="background-color:black">
+                        <input style="background-color: red" th:type="submit" th:value="Удалить">
+                    </label>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<br>
+
+<div style="margin-left:40px; text-align:center">
+    <form th:method="GET" th:action="@{/userAdd}">
+        <label>
+            <input name="submit" type="submit" value="Добавить пользователя">
+        </label>
+    </form>
+</div>
+
+</body>
+</html>
+

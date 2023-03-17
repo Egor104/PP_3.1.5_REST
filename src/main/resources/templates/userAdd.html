@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>new user page</title>
+</head>
+<body>
+<p style="text-align:center">&nbsp;</p>
+
+<div style="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px">
+    <form th:method="POST" th:object="${user}" th:action="@{/new_user}">
+        <p style="margin-left:25px; text-align:center">
+            <label for="username">Имя &nbsp;</label>
+            <input id="username" name="username" type="text" th:field="*{username}">
+        </p>
+        <p style="margin-left:25px; text-align:center">
+            <label for="password">Пароль &nbsp;</label>
+            <input id="password" name="password" type="text" th:field="*{password}">
+        </p>
+        <p style="margin-left:50px; text-align:center">
+            <input name="submit" type="submit" value="Сохранить">
+        </p>
+    </form>
+</div>
+</body>
+</html>

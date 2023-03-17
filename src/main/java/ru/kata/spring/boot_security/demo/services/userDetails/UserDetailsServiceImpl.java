@@ -1,5 +1,7 @@
 package ru.kata.spring.boot_security.demo.services.userDetails;
 
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +27,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findUserByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found");
+        try {
+            Hibernate.initialize(user.getRoles());
+        } catch (HibernateException ex) {
+            System.out.println("Ошибка инициализации ролей");
+        }
         return user;
     }
 }

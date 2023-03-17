@@ -1,10 +1,12 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 // «Пользователь» – это просто Object. В большинстве случаев он может быть приведен к классу UserDetails.
 
@@ -52,7 +54,9 @@ public class User implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { return getRoles(); }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles().stream().map(x -> new SimpleGrantedAuthority(x.getName())).collect(Collectors.toList());
+    }
     @Override
     public String getPassword() { return password; }
     @Override
