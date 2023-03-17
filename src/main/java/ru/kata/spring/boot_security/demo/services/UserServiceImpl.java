@@ -1,13 +1,12 @@
 package ru.kata.spring.boot_security.demo.services;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +15,11 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @PersistenceContext
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -31,7 +30,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         user.setRoles(Collections.singleton(new Role(1L,"ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
