@@ -4,12 +4,15 @@
     <title>User page</title>
 </head>
 <body>
-<h1>Welcome to <span th:text="${#authentication.name}"></span> page!</h1>
-<h3 th:text="${user.getId()}"></h3>
+<h1 style="text-align:center" th:text="'Добро пожаловать, ' + ${user.getUsername()} + '!'" ></h1>
+<h2 style="text-align:center" th:text="'Ваш id: ' + ${user.getId()}"></h2>
+<!--Как ещё можно достать username из Principal:-->
+<!--Способ 1:-->
+<!--<h1>Welcome to <span th:text="${#authentication.name}"></span> page!</h1>-->
 <!--Способ 2:-->
 <!--<div sec:authorize="isAuthenticated()">-->
 <!--    <h3> Your username is: <span sec:authentication="name"></span></h3></div>-->
-<form th:action="@{/logout}" th:method="POST">
+<form style="text-align:center" th:action="@{/logout}" th:method="POST">
     <input type="submit" value="Выйти"/>
 </form>
 </body>
