@@ -8,15 +8,20 @@
 <div align="center" style="background:#eeeeee; border:1px solid #cccccc; ">
     <form th:method="PATCH" th:action="@{/edit/{id}(id=${user.getId()})}" th:object="${user}">
         <p style="margin-right:6px; text-align:center">
-        <label for="username">Новое имя </label>
-        <input type="text" th:field="*{username}" id="username"/>
+            <label for="username">Новое имя </label>
+            <input type="text" th:field="*{username}" id="username"/>
         </p>
-        <br>
-        <br>
-        <input th:action="@{/users/}" type="submit" value="Обновить данные"/>
-
+<!--        <p style="margin-right:30px; text-align:center">-->
+<!--            <label for="password">Новый пароль</label>-->
+<!--            <input type="text" th:field="*{password}" id="password"/>-->
+<!--        </p>-->
     </form>
 </div>
-
+<form style="padding: 5px; margin-left:10px; text-align:center">
+    <input th:action="@{/users/}" type="submit" value="Обновить данные"/>
+</form>
+<form style="margin-left:10px; text-align:center" th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Выйти"/>
+</form>
 </body>
 </html>

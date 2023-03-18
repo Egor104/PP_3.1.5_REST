@@ -32,7 +32,7 @@
             </td>
 
             <td style="text-align: center">
-                <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}">
                     <label style="background-color:black">
                         <input style="background-color: red" th:type="submit" th:value="Удалить">
                     </label>
@@ -50,8 +50,10 @@
             <input name="submit" type="submit" value="Добавить пользователя">
         </label>
     </form>
+    <form style="padding: 5px; text-align:center" th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="Выйти"/>
+    </form>
 </div>
-
 </body>
 </html>
 

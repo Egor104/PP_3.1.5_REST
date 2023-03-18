@@ -13,7 +13,7 @@
             <label for="username">Имя &nbsp;</label>
             <input id="username" name="username" type="text" th:field="*{username}">
         </p>
-        <p style="margin-left:25px; text-align:center">
+        <p style="margin-left:5px; text-align:center">
             <label for="password">Пароль &nbsp;</label>
             <input id="password" name="password" type="text" th:field="*{password}">
         </p>
@@ -21,6 +21,10 @@
             <input name="submit" type="submit" value="Сохранить">
         </p>
     </form>
+    <form style="margin-left:50px; text-align:center" th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="Выйти"/>
+    </form>
 </div>
+
 </body>
 </html>
