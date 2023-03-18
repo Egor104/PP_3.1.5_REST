@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Welcome to <span th:text="${#authentication.name}"></span> page!</h1>
+<h3 th:text="${user.getId()}"></h3>
 <!--Способ 2:-->
 <!--<div sec:authorize="isAuthenticated()">-->
 <!--    <h3> Your username is: <span sec:authentication="name"></span></h3></div>-->
