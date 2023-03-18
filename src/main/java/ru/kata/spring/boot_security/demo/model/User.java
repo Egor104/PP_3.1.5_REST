@@ -8,8 +8,6 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// «Пользователь» – это просто Object. В большинстве случаев он может быть приведен к классу UserDetails.
-
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -24,9 +22,7 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    // FetchType.EAGER – «жадная» загрузка, т.е. список ролей загружается
-    // вместе с пользователем сразу (не ждет пока к нему обратятся).
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     // Создаём новую таблицу (третью) с двумя колонками, связывая юзеров с ролями.
     @JoinTable(name = "user_roles",
             joinColumns =  @JoinColumn(name = "user_id"),

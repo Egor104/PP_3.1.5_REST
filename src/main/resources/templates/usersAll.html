@@ -26,15 +26,15 @@
             <td style="text-align: center">
                 <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
                     <label>
-                        <input style="background-color: cornflowerblue" th:type="submit" th:value="Редактировать">
+                        <input style="border-radius: 8px; cursor: pointer; background-color: cornflowerblue" th:type="submit" th:value="Редактировать">
                     </label>
                 </form>
             </td>
 
             <td style="text-align: center">
                 <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
-                    <label style="background-color:black">
-                        <input style="background-color: red" th:type="submit" th:value="Удалить">
+                    <label>
+                        <input style="border-radius: 8px; cursor: pointer; background-color: red" th:type="submit" th:value="Удалить">
                     </label>
                 </form>
             </td>
@@ -50,7 +50,7 @@
             <input name="submit" type="submit" value="Добавить пользователя">
         </label>
     </form>
-    <form style="padding: 5px; text-align:center" th:action="@{/logout}" th:method="POST">
+    <form style="padding: 15px; text-align:center" th:action="@{/logout}" th:method="POST">
         <input type="submit" value="Выйти"/>
     </form>
 </div>

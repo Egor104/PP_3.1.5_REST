@@ -48,20 +48,4 @@ public class AdminController {
         userService.deleteUserById(id);
         return "redirect:/admin";
     }
-
-//    @GetMapping("/admin")
-//    public String userList(Model model) {
-//        model.addAttribute("allUsers", userService.findAllUsers());
-//        return "admin";
-//    }
-//
-//    @PostMapping("/admin")
-//    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-//                              @RequestParam(required = true, defaultValue = "" ) String action,
-//                              Model model) {
-//        if (action.equals("delete")){
-//            userService.deleteUserById(userId);
-//        }
-//        return "redirect:/admin";
-//    }
 }

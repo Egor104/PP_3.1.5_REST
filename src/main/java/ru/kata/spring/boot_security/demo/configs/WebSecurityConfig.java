@@ -49,10 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
-    // Метод для шифрования пароля
     @Bean
     PasswordEncoder getPasswordEncoder() {
-        // Шифруем через BCrypt
         return new BCryptPasswordEncoder();
     }
 }
