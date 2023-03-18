@@ -24,7 +24,7 @@
             <td style="text-align:center" th:text="${user.getUsername()}">Имя</td>
 
             <td style="text-align: center">
-                <form th:method="GET" th:action="@{/edit/{id}(id=${user.getId()})}">
+                <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
                     <label>
                         <input style="background-color: cornflowerblue" th:type="submit" th:value="Редактировать">
                     </label>
@@ -32,7 +32,7 @@
             </td>
 
             <td style="text-align: center">
-                <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}">
+                <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
                     <label style="background-color:black">
                         <input style="background-color: red" th:type="submit" th:value="Удалить">
                     </label>
@@ -45,7 +45,7 @@
 <br>
 
 <div style="margin-left:40px; text-align:center">
-    <form th:method="GET" th:action="@{/userAdd}">
+    <form th:method="GET" th:action="@{admin/userAdd}">
         <label>
             <input name="submit" type="submit" value="Добавить пользователя">
         </label>

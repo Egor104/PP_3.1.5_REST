@@ -8,7 +8,7 @@
 <p style="text-align:center">&nbsp;</p>
 
 <div style="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px">
-    <form th:method="POST" th:object="${user}" th:action="@{/new_user}">
+    <form th:method="POST" th:object="${user}" th:action="@{/admin/new_user}">
         <p style="margin-left:25px; text-align:center">
             <label for="username">Имя &nbsp;</label>
             <input id="username" name="username" type="text" th:field="*{username}">

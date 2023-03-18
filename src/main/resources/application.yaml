@@ -2,8 +2,6 @@ server:
   port: 8080
   servlet:
     context-path: /
-    session:
-      timeout: 21600
 spring:
   jpa:
     show-sql: false
