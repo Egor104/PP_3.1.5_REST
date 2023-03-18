@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -17,9 +19,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String showInfo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.findUserById(id));
+    @GetMapping("/user")
+    public String showInfo(Principal principal, Model model) {
+        model.addAttribute("user", userService.findUserByUsername(principal.getName()));
         return "userInfo";
     }
 }
