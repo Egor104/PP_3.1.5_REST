@@ -20,7 +20,10 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String firstname;
+    private String lastname;
+    private int age;
+    private String email;
     private String password;
     @ManyToMany
     // Создаём новую таблицу (третью) с двумя колонками, связывая юзеров с ролями.
@@ -30,24 +33,36 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User() {}
-
-    public Long getId() { return id; }
-    public Set<Role> getRoles() { return roles; }
-
-    public void setId(Long id) { this.id = id; }
-    public void setUsername(String username) { this.username = username; }
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
-    public void setPassword(String password) { this.password = password; }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
+    public Long getId() {
+        return id;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getFirstname() {
+        return firstname;
+    }
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    public String getLastname() {
+        return lastname;
+    }
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
+    public Set<Role> getRoles() { return roles; }
+    public String getRolesString() { return roles.toString(); }
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,7 +71,7 @@ public class User implements UserDetails {
     @Override
     public String getPassword() { return password; }
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() { return email; }
     @Override
     public boolean isAccountNonExpired() { return true; }
     @Override
