@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
         if (userDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(2L,"ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

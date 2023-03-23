@@ -1,24 +1,72 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>User page</title>
 </head>
-<body>
-<h1 style="text-align:center" th:text="'Добро пожаловать, ' + ${user.getUsername()} + '!'" ></h1>
-<h2 style="text-align:center" th:text="'Ваш id: ' + ${user.getId()}"></h2>
-<!--Как ещё можно достать username из Principal:-->
-<!--Способ 1:-->
-<!--<h1>Welcome to <span th:text="${#authentication.name}"></span> page!</h1>-->
-<!--Способ 2:-->
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--    <h3> Your username is: <span sec:authentication="name"></span></h3></div>-->
-<form style="text-align:center" th:action="@{/logout}" th:method="POST">
-    <input type="submit" value="Выйти"/>
-</form>
-</body>
+<!--панель навигации верхняя-->
+<header class="bd-header bg-dark py-2">
+    <div class="d-flex justify-content-sm-between ml-3 mr-3">
+        <h5 class="text-white"
+            th:text="${user.getEmail()} +' with roles: '+ ${user.getRoles()}">
+        </h5>
+        <a th:href="@{/logout}" class="text-secondary">Logout</a>
+    </div>
+</header>
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div class="col-md-2 g-0 py-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" id="user-nav-link" data-toggle="tab"
+                       data-target="#user-panel"
+                       type="button" role="tab" aria-controls="user-panel" aria-selected="false">User</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10 bg-light gx-5 py-3 tab-content">
+            <div class="tab-pane fane show active" id="user-panel" role="tabpanel"
+                 aria-labelledby="user-nav-link" tabindex="0">
+                <h2>User information-page</h2>
+                <div class="tab-content" role="tabpanel" aria-labelledby="admin-nav-link">
+                    <div class="tab-pane fade show active" role="tabpanel" tabindex="0">
+                        <div class="card">
+                            <h5 class="card-header">About user</h5>
+                            <div class="card-body text-center">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${user.getId()}"></td>
+                                        <td th:text="${user.getFirstname()}"></td>
+                                        <td th:text="${user.getLastname()}"></td>
+                                        <td th:text="${user.getAge()}"></td>
+                                        <td th:text="${user.getEmail()}"></td>
+                                        <td th:text="${user.getRoles()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

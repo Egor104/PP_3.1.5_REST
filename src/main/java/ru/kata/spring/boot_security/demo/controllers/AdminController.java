@@ -1,9 +1,11 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
@@ -13,30 +15,25 @@ import java.security.Principal;
 public class AdminController {
 
     private final UserService userService;
-    public AdminController(UserService userService) { this.userService = userService; }
-
-    @GetMapping
-    public String listUsers(Model model) {
-        model.addAttribute("users", userService.findAllUsers());
-        return "usersAll";
+    private final RoleService roleService;
+    public AdminController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
-    @GetMapping("/userAdd")
-    public String showFormForAdd(Model model) {
-        model.addAttribute("user", new User());
-        return "userAdd";
+    @GetMapping
+    public String listUsers(Principal principal, Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("users", userService.findAllUsers());
+        model.addAttribute("admin", userService.findUserByUsername(principal.getName()));
+        model.addAttribute("newUser", new User());
+        model.addAttribute("rolesAdd", roleService.getUniqAllRoles());
+        return "usersAll";
     }
 
     @PostMapping("/new_user")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
-    }
-
-    @GetMapping( "/edit/{id}")
-    public String showFormForUpdate(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.findUserById(id));
-        return "userUpdate";
     }
 
     @PostMapping("/edit/{id}")

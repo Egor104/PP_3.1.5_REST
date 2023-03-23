@@ -61,7 +61,6 @@ public class User implements UserDetails {
     public void setEmail(String email) { this.email = email; }
     public void setPassword(String password) { this.password = password; }
     public Set<Role> getRoles() { return roles; }
-    public String getRolesString() { return roles.toString(); }
     public void setRoles(Set<Role> roles) { this.roles = roles; }
 
     @Override
